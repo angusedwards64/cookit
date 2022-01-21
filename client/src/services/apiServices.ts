@@ -1,7 +1,7 @@
-import axios from 'axios'
+const axios = require('axios');
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'http://localhost:5001',
   withCredentials: true,
   headers: {
     Accept: 'application/json',
@@ -15,6 +15,7 @@ const api = {}
 
 api.signUp = async (user) => {
   try {
+    console.log(user)
     const response = await apiClient.post('/api/auth/signup', user)
     return response
   } catch (error) {
@@ -26,6 +27,7 @@ api.login = async (user) => {
   try {
     const response = await apiClient.post('/api/auth/login', user)
     return response
+    console.log(response)
   } catch (error) {
     console.error(error)
   }
