@@ -21,8 +21,10 @@ exports.getByEmail = async (email) => {
 exports.add = async (data) => {
   try {
     const result = await db.insert(data).into('users').returning('*')
+    console.log('hi')
     return result[0]
   } catch (e) {
+  console.log('e',e)
     return e
   }
 }
