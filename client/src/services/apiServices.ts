@@ -1,4 +1,4 @@
-import axios from 'axios'
+const axios = require('axios');
 
 const apiClient = axios.create({
   baseURL: 'http://localhost:5001',
@@ -9,29 +9,48 @@ const apiClient = axios.create({
   },
 })
 
-const api = {}
+interface ApiObject {
+  signUp: (user: UserObject) => {accessToken: string, user: UserObject};
+  login: object;
+  getRecipes?: object;
+  logout?: object;
+  postRecipes?: object;
+  getRecipe?: object;
+}
+
+interface UserObject {
+  email: string;
+  password: string;
+  name: string;
+  username: string;
+}
+
+
+
+const api: ApiObject = {
 
 //USER
 
-api.signUp = async (user) => {
+signUp: async (user: UserObject) =>{
   try {
+    console.log(user)
     const response = await apiClient.post('/api/auth/signup', user)
     return response
   } catch (error) {
     console.error(error)
   }
-}
+},
 
-api.login = async (user) => {
+login = async (user: UserObject) => {
   try {
     const response = await apiClient.post('/api/auth/login', user)
     return response
   } catch (error) {
     console.error(error)
   }
-}
+},
 
-api.logout = async (tokenName,user) => {
+api.logout = async (tokenName: string, user: string) => {
   localStorage.removeItem(tokenName)
   localStorage.removeItem(user)
 }
@@ -46,7 +65,7 @@ api.getRecipes = async () => {
     console.error(error)
   }
 }
-api.getRecipe = async (id) => {
+api.getRecipe = async (id: string) => {
   try {
     const response = await apiClient.get('/api/recipes/' + id)
     return response
@@ -65,6 +84,8 @@ api.postRecipes = async (tokenName, data) => {
   } catch (error) {
     console.error(error)
   }
+}
+
 }
 
 export default api

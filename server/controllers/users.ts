@@ -1,10 +1,9 @@
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const User = require('../models/users')
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import User from '../models/users'
 const SECRET_KEY = process.env.SECRET_KEY || 'not secure'
 
 exports.create = async (req, res) => {
-  console.log('user',req.body)
   const { name, username, email, password } = req.body
   const checkUser = await User.getByEmail({ email })
   console.log(checkUser);
