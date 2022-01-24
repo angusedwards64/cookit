@@ -5,7 +5,6 @@ const Recipe = require('../models/recipes')
 exports.create = async (req, res) => {
   const { title, description, ingredients, steps, cuisine_id } = req.body
   const user_id = req.user.id
-  
   try {
     const result = await Recipe.add({
       user_id,
@@ -15,7 +14,7 @@ exports.create = async (req, res) => {
       ingredients,
       steps,
     })
-    
+
     res.status(201);
     res.json(result);
   } catch (error) {

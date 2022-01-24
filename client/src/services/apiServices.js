@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'http://localhost:5001',
   withCredentials: true,
   headers: {
     Accept: 'application/json',
@@ -58,8 +58,8 @@ api.postRecipes = async (tokenName, data) => {
   console.log('api data: ', data);
   console.log('api token: ', tokenName);
   try {
-    const response = await apiClient.post('/api/recipes/create', data, { 
-      headers: { 'jwt': tokenName } 
+    const response = await apiClient.post('/api/recipes/create', data, {
+      headers: { 'jwt': tokenName }
     });
     return response
   } catch (error) {
