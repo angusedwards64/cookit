@@ -55,13 +55,12 @@ export default function PostRecipe(props) {
     e.preventDefault()
     const { title, description, ingredients, steps } = state;
     const recipe = { title, cuisine_id: 1, user_id: props.user.id, description, ingredients, steps };
-    
+
     const res = await api.postRecipes(localStorage.accessToken, recipe);
-    
-    
-    
+
+
     navigate('/')
-  
+
   }
 
   return (
