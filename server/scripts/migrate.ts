@@ -1,8 +1,8 @@
-const db = require('../models/db')
+const datab = require('../models/db')
 ;(async () => {
   try {
-    await db.schema.dropTableIfExists('users')
-    await db.schema.withSchema('public').createTable('users', (table) => {
+    await datab.schema.dropTableIfExists('users')
+    await datab.schema.withSchema('public').createTable('users', (table) => {
       table.increments('id').primary()
       table.string('name')
       table.string('username')
@@ -11,15 +11,15 @@ const db = require('../models/db')
       table.timestamps(true, true)
     })
     console.log('Created users table!')
-    await db.schema.dropTableIfExists('cuisines')
-    await db.schema.withSchema('public').createTable('cuisines', (table) => {
+    await datab.schema.dropTableIfExists('cuisines')
+    await datab.schema.withSchema('public').createTable('cuisines', (table) => {
       table.increments('id').primary()
       table.string('cuisine')
       table.timestamps(true, true)
       console.log('Created cuisines table!')
     })
-    await db.schema.dropTableIfExists('recipes')
-    await db.schema.withSchema('public').createTable('recipes', (table) => {
+    await datab.schema.dropTableIfExists('recipes')
+    await datab.schema.withSchema('public').createTable('recipes', (table) => {
       table.increments('id').primary()
       table
         .integer('user_id')
@@ -44,8 +44,8 @@ const db = require('../models/db')
       table.index(['user_id'], 'idx_recipe_user')
       console.log('Created recipes table!')
     })
-    await db.schema.dropTableIfExists('comments')
-    await db.schema.withSchema('public').createTable('comments', (table) => {
+    await datab.schema.dropTableIfExists('comments')
+    await datab.schema.withSchema('public').createTable('comments', (table) => {
       table.increments('id').primary()
       table
         .integer('recipe_id')
@@ -59,8 +59,8 @@ const db = require('../models/db')
       table.index(['recipe_id'], 'idx_comments_recipe')
       console.log('Created comments table!')
     })
-    await db.schema.dropTableIfExists('replys')
-    await db.schema.withSchema('public').createTable('replys', (table) => {
+    await datab.schema.dropTableIfExists('replys')
+    await datab.schema.withSchema('public').createTable('replys', (table) => {
       table.increments('id').primary()
       table
         .integer('comment_id')
@@ -74,8 +74,8 @@ const db = require('../models/db')
       table.index(['comment_id'], 'idx_replys_comment')
       console.log('Created replys table!')
     })
-    await db.schema.dropTableIfExists('likes')
-    await db.schema.withSchema('public').createTable('likes', (table) => {
+    await datab.schema.dropTableIfExists('likes')
+    await datab.schema.withSchema('public').createTable('likes', (table) => {
       table.increments('id').primary()
       table
         .integer('user_id')
@@ -97,8 +97,8 @@ const db = require('../models/db')
       table.index(['user_id'], 'idx_likes_user')
       console.log('Created likes table!')
     })
-    await db.schema.dropTableIfExists('photos')
-    await db.schema.withSchema('public').createTable('photos', (table) => {
+    await datab.schema.dropTableIfExists('photos')
+    await datab.schema.withSchema('public').createTable('photos', (table) => {
       table.increments('id').primary()
       table
         .integer('recipe_id')
@@ -112,15 +112,15 @@ const db = require('../models/db')
       table.index(['recipe_id'], 'idx_photos_recipe')
       console.log('Created photos table!')
     })
-    await db.schema.dropTableIfExists('tags')
-    await db.schema.withSchema('public').createTable('tags', (table) => {
+    await datab.schema.dropTableIfExists('tags')
+    await datab.schema.withSchema('public').createTable('tags', (table) => {
       table.increments('id').primary()
       table.string('tag')
       table.timestamps(true, true)
       console.log('Created tags table!')
     })
-    await db.schema.dropTableIfExists('tag_recipes')
-    await db.schema.withSchema('public').createTable('tag_recipes', (table) => {
+    await datab.schema.dropTableIfExists('tag_recipes')
+    await datab.schema.withSchema('public').createTable('tag_recipes', (table) => {
       table.increments('id').primary()
       table
         .integer('recipe_id')

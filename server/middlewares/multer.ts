@@ -1,7 +1,7 @@
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
-const multerMiddleware = async (req, res, next) => {
+const multerMiddle = async (req, res, next) => {
   try {
     console.log(req)
     const file = await upload.single('photo')
@@ -13,4 +13,4 @@ const multerMiddleware = async (req, res, next) => {
   }
 }
 
-module.exports = multerMiddleware
+module.exports = multerMiddle

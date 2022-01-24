@@ -1,6 +1,6 @@
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import User from '../models/users'
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const User = require('../../models/users')
 const SECRET_KEY = process.env.SECRET_KEY || 'not secure'
 
 exports.create = async (req, res) => {
