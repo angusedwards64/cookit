@@ -30,7 +30,12 @@ interface Recipe {
   username: string,
 }
 
-export default function ItemRecipe( recipe : Recipe) {
+interface ItemRecipeProps {
+  key: number;
+  recipe: Recipe;
+}
+
+export default function ItemRecipe( props : ItemRecipeProps) {
   // let navigate = useNavigate()
 
   return (
@@ -64,16 +69,16 @@ export default function ItemRecipe( recipe : Recipe) {
             fontSize={'sm'}
             letterSpacing={1.1}
           >
-            <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+            <Link to={`/recipe/${props.recipe.id}`}>{props.recipe.title}</Link>
           </Text>
           <Heading
             color={useColorModeValue('gray.700', 'white')}
             fontSize={'2xl'}
             fontFamily={'body'}
           >
-            {recipe.cuisine}
+            {props.recipe.cuisine}
           </Heading>
-          <Text color={'gray.500'}>{recipe.description}</Text>
+          <Text color={'gray.500'}>{props.recipe.description}</Text>
         </Stack>
         <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
           <Badge
@@ -107,8 +112,8 @@ export default function ItemRecipe( recipe : Recipe) {
             alt={'Author'}
           /> */}
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>  {recipe.username}</Text>
-            <Text color={'gray.500'}>{moment(recipe.updated_at).format('DD MMM YYYY')}</Text>
+            <Text fontWeight={600}>  {props.recipe.username}</Text>
+            <Text color={'gray.500'}>{moment(props.recipe.updated_at).format('DD MMM YYYY')}</Text>
           </Stack>
         </Stack>
       </Box>

@@ -47,7 +47,7 @@ interface PostRecipeProps {
         isAuthenticated: boolean;
         setIsAuthenticated: Dispatch<SetStateAction<Boolean>>;
         user: authenticatedUser;
-        setAuthenticatedUser:Dispatch<SetStateAction<authenticatedUser>>;
+        setAuthenticatedUser:Dispatch<SetStateAction<authenticatedUser[]>>;
 }
 
 export default function PostRecipe(props: PostRecipeProps) {

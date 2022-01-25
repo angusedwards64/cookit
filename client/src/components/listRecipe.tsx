@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, Dispatch, SetStateAction } from 'react'
 import ItemRecipe from './itemRecipe'
 
 
@@ -17,10 +17,15 @@ interface Recipe {
   username: string,
 }
 
+interface ListRecipeProps {
+  recipes: Recipe[]
+  setIsAuthenticated: Dispatch<SetStateAction<Boolean>>;
+}
 
-export default function ListRecipe(recipes: Recipe[]) {
+
+export default function ListRecipe(props: ListRecipeProps) {
   return (
-       recipes.length && recipes.map((recipe) => (
+       props.recipes.length && props.recipes.map((recipe) => (
           <ItemRecipe key={recipe.id} recipe={recipe}/>
       ))
     // <ItemRecipe />

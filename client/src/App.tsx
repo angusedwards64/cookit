@@ -22,12 +22,27 @@ interface authenticatedUser {
   updated_at: string;
 }
 
+interface Recipe {
+  id: number,
+  user_id: number,
+  cuisine_id: number,
+  title: string,
+  description: string,
+  ingredients: string,
+  steps: string,
+  likes: null,
+  created_at: string,
+  updated_at: string,
+  cuisine: string,
+  username: string,
+}
+
 function App() {
 
   const initialState = auth.isAuthenticated()
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialState)
   const [user, setAuthenticatedUser] = useState<authenticatedUser[]>([])
-  const [recipes, setRecipes] = useState([])
+  const [recipes, setRecipes] = useState<Recipe[]>([])
 
   useEffect(() => {
     api.getRecipes().then((data) => {
@@ -41,7 +56,7 @@ function App() {
         <Nav
           isAuthenticated={isAuthenticated}
           setIsAuthenticated={setIsAuthenticated}
-          user={user}
+          user={user[0]}
           setAuthenticatedUser={setAuthenticatedUser}
         />
         <Routes>
@@ -56,13 +71,13 @@ function App() {
           />
           <Route
             path='/recipe/:id'
-            element={<DetailsRecipe />}
+            // element={<DetailsRecipe setIsAuthenticated={setIsAuthenticated}/>}
           />
           <Route
             path='/recipe/post'
             element={<PostRecipe isAuthenticated={isAuthenticated}
           setIsAuthenticated={setIsAuthenticated}
-          user={user}
+          user={user[0]}
           setAuthenticatedUser={setAuthenticatedUser} />}
           />
           <Route
@@ -70,7 +85,7 @@ function App() {
             element={
               <SignIn
                 setIsAuthenticated={setIsAuthenticated}
-                user={user}
+                // user={user}
                 setAuthenticatedUser={setAuthenticatedUser}
               />
             }

@@ -23,10 +23,6 @@ const initialState = {
   password: '',
 }
 
-// interface User {
-//   email: string;
-//   password: string;
-// }
 
 interface authenticatedUser {
   id: string;
@@ -40,7 +36,7 @@ interface authenticatedUser {
 
 interface SignInProps {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>,
-      setAuthenticatedUser: Dispatch<SetStateAction<authenticatedUser>>,
+      setAuthenticatedUser: Dispatch<SetStateAction<authenticatedUser[]>>,
 }
 
 
