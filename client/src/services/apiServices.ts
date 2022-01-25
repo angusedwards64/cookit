@@ -9,29 +9,23 @@ const apiClient = axios.create({
   },
 })
 
-interface ApiObject {
-  signUp: (user: UserObject) => {accessToken: string, user: UserObject};
-  login: object;
-  getRecipes?: object;
-  logout?: object;
-  postRecipes?: object;
-  getRecipe?: object;
-}
 
-interface UserObject {
+interface UserSignUpObject {
   email: string;
   password: string;
   name: string;
   username: string;
 }
 
+interface UserSignInObject {
+  email: string;
+  password: string;
+}
 
-
-const api: ApiObject = {
 
 //USER
 
-signUp: async (user: UserObject) =>{
+const signUp = async (user: UserSignUpObject) => {
   try {
     console.log(user)
     const response = await apiClient.post('/api/auth/signup', user)
@@ -39,33 +33,35 @@ signUp: async (user: UserObject) =>{
   } catch (error) {
     console.error(error)
   }
-},
+}
 
-login = async (user: UserObject) => {
+const login = async (user: UserSignInObject) => {
+  console.log(user)
   try {
     const response = await apiClient.post('/api/auth/login', user)
     return response
   } catch (error) {
     console.error(error)
   }
-},
+}
 
-api.logout = async (tokenName: string, user: string) => {
+ const logout = async (tokenName: string, user: string) => {
   localStorage.removeItem(tokenName)
   localStorage.removeItem(user)
 }
 
 //RECIPE
 
-api.getRecipes = async () => {
+const getRecipes = async () => {
   try {
     const response = await apiClient.get('/api/recipes')
+    console.log('recipes', response)
     return response
   } catch (error) {
     console.error(error)
   }
 }
-api.getRecipe = async (id: string) => {
+const getRecipe = async (id: string) => {
   try {
     const response = await apiClient.get('/api/recipes/' + id)
     return response
@@ -73,7 +69,7 @@ api.getRecipe = async (id: string) => {
     console.error(error)
   }
 }
-api.postRecipes = async (data: {}) => {
+const postRecipes = async (data: {}) => {
   try {
     const response = await apiClient.post('/api/recipes/create', data)
     return response
@@ -82,15 +78,7 @@ api.postRecipes = async (data: {}) => {
   }
 }
 
-}
+const api = {signUp, login, logout, getRecipes, getRecipe, postRecipes}
 
 export default api
 
-// export default {
-//   getEvents() {
-//     return apiClient.get('/events')
-//   },
-//   getEvent(id) {
-//     return apiClient.get('/events/' + id)
-//   },
-// }

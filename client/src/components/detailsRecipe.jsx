@@ -22,14 +22,22 @@ import {
 import { useParams } from 'react-router-dom'
 import api from '../services/apiServices'
 
+// interface RECIPES {
+
+// }
+
 export default function DetailsRecipe() {
+
+  // console.log('hi')
   const { id } = useParams()
   const [recipe, setRecipe] = useState([])
 
   useEffect(() => {
+    if (id)
     api.getRecipe(id).then((data) => {
-      setRecipe(data.data)
+      setRecipe(data.data);
     })
+
   })
   return (
     <Container maxW={'7xl'}>
@@ -86,12 +94,6 @@ export default function DetailsRecipe() {
               >
                 {recipe.description}
               </Text>
-              {/* <Text fontSize={'lg'}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
-                aliquid amet at delectus doloribus dolorum expedita hic, ipsum
-                maxime modi nam officiis porro, quae, quisquam quos
-                reprehenderit velit? Natus, totam.
-              </Text> */}
             </VStack>
             <Box>
               <Text

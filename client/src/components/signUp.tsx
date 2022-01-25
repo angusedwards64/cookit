@@ -19,6 +19,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import auth from '../utils/auth'
 import api from '../services/apiServices'
 import { useNavigate } from 'react-router-dom'
+import React from 'react'
 
 const initialState = {
   name: '',
