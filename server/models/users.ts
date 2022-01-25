@@ -1,5 +1,9 @@
 const database = require('./db')
 
+interface Data {
+  id: string;
+}
+
 exports.getById = async (id: string) => {
   try {
     const result = await database.select('*').from('users').where({ id }).first()
@@ -18,7 +22,7 @@ exports.getByEmail = async (email: string) => {
   }
 }
 
-exports.add = async (data) => {
+exports.add = async (data: Data) => {
   try {
     const result = await database.insert(data).into('users').returning('*')
     console.log('hi')

@@ -1,5 +1,9 @@
 const db = require('./db')
 
+interface Data {
+  id: string;
+}
+
 exports.getById = async (id: string) => {
   try {
     console.log(id)
@@ -28,7 +32,7 @@ exports.list = async () => {
     return e
   }
 }
-exports.add = async (data) => {
+exports.add = async (data: Data) => {
   try {
     const result = await db.insert(data).into('recipes').returning('*')
     return result
@@ -38,7 +42,7 @@ exports.add = async (data) => {
   }
 }
 
-exports.edit = async (data) => {
+exports.edit = async (data: Data) => {
   try {
     const result = await db.update(data).from('recipes').where({ id: data.id })
     return result
