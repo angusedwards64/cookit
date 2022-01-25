@@ -33,7 +33,6 @@ exports.add = async (data) => {
     const result = await db.insert(data).into('recipes').returning('*')
     return result
   } catch (e) {
-    console.log(e)
     return e
   }
 }
