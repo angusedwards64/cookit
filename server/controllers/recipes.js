@@ -3,6 +3,7 @@ const Recipe = require('../models/recipes')
 // const User = require('../models/users')
 
 exports.create = async (req, res) => {
+  console.log('request body', req.body)
   const { title, description, ingredients, steps, cuisine_id } = req.body
   const user_id = req.user.id
   try {

@@ -4,9 +4,9 @@ module.exports = knex({
   client: 'postgres',
   connection: {
     host: '127.0.0.1',
-    user: 'newuser',
+    user: 'gooseeduardos',
     password: '',
-    database: 'cookit1',
+    database: 'cookit2',
     port: 5432,
   },
 })

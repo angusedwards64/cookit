@@ -42,7 +42,7 @@ function App() {
   const initialState = auth.isAuthenticated()
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialState)
   const [user, setAuthenticatedUser] = useState<authenticatedUser[]>([])
-  const [recipes, setRecipes] = useState<Recipe[]>([])
+  const [recipes, setRecipes] = useState([])
 
   useEffect(() => {
     api.getRecipes().then((data) => {
@@ -63,10 +63,12 @@ function App() {
           <Route
             path='/'
             element={
+              <>
               <ListRecipe
                 setIsAuthenticated={setIsAuthenticated}
                 recipes={recipes}
-              />
+                />
+             </>
             }
           />
           <Route

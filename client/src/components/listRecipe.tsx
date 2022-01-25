@@ -20,14 +20,17 @@ interface Recipe {
 interface ListRecipeProps {
   recipes: Recipe[]
   setIsAuthenticated: Dispatch<SetStateAction<Boolean>>;
+  // setIsAuthenticated: (setisAuthenticated: fn) => void;
 }
 
 
 export default function ListRecipe(props: ListRecipeProps) {
   return (
-       props.recipes.length && props.recipes.map((recipe) => (
+    <>
+    {props.recipes.length && props.recipes.map((recipe) => (
           <ItemRecipe key={recipe.id} recipe={recipe}/>
-      ))
+      ))}
+    </>
     // <ItemRecipe />
   )
 }

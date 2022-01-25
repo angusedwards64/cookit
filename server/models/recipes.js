@@ -29,6 +29,7 @@ exports.list = async () => {
   }
 }
 exports.add = async (data) => {
+  console.log('addfunction', data)
   try {
     const result = await db.insert(data).into('recipes').returning('*')
     return result
