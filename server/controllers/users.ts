@@ -2,8 +2,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/users')
 const SECRET_KEY = process.env.SECRET_KEY || 'not secure'
+import { Request, Response, NextFunction } from 'express';
 
-exports.create = async (req, res) => {
+exports.create = async (req: Request, res: Response, next: NextFunction) => {
   const { name, username, email, password } = req.body
   const checkUser = await User.getByEmail({ email })
   console.log(checkUser);
@@ -23,7 +24,7 @@ exports.create = async (req, res) => {
   }
 }
 
-exports.login = async (req, res) => {
+exports.login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body
   try {
     const user = await User.getByEmail({ email })

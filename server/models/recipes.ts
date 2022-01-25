@@ -1,6 +1,6 @@
 const db = require('./db')
 
-exports.getById = async (id) => {
+exports.getById = async (id: string) => {
   try {
     console.log(id)
     const result = await db
@@ -47,7 +47,7 @@ exports.edit = async (data) => {
   }
 }
 
-exports.deleteById = async (id) => {
+exports.deleteById = async (id: string) => {
   try {
     const result = await db.from('recipes').where({ id }).del()
     return result

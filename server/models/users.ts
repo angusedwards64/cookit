@@ -1,6 +1,6 @@
 const database = require('./db')
 
-exports.getById = async (id) => {
+exports.getById = async (id: string) => {
   try {
     const result = await database.select('*').from('users').where({ id }).first()
     return result
@@ -9,7 +9,7 @@ exports.getById = async (id) => {
   }
 }
 
-exports.getByEmail = async (email) => {
+exports.getByEmail = async (email: string) => {
   try {
     const result = await database.from('users').where(email)
     return result

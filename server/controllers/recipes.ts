@@ -1,8 +1,7 @@
-// const User = require('../models/users')
 const Recipe = require('../models/recipes')
-// const User = require('../models/users')
+import { Request, Response, NextFunction } from 'express';
 
-exports.create = async (req, res) => {
+exports.create = async (req: Request, res: Response, next: NextFunction) => {
   const { title, description, ingredients, steps, cuisine_id } = req.body
   const user_id = req.user.id
   try {
@@ -23,7 +22,7 @@ exports.create = async (req, res) => {
   }
 }
 
-exports.list = async (req, res) => {
+exports.list = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await Recipe.list()
     res.status(200).send(result)
@@ -33,7 +32,7 @@ exports.list = async (req, res) => {
   }
 }
 
-exports.getById = async (req, res) => {
+exports.getById = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.params.id
   try {
     const result = await Recipe.getById(id)
