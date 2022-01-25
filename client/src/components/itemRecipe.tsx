@@ -13,9 +13,24 @@ import {
 // import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import React from 'react'
 
+interface Recipe {
+  id: number,
+  user_id: number,
+  cuisine_id: number,
+  title: string,
+  description: string,
+  ingredients: string,
+  steps: string,
+  likes: null,
+  created_at: string,
+  updated_at: string,
+  cuisine: string,
+  username: string,
+}
 
-export default function ItemRecipe({ recipe }) {
+export default function ItemRecipe( recipe : Recipe) {
   // let navigate = useNavigate()
 
   return (

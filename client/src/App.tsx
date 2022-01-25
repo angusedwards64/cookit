@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 // import ItemRecipe from './components/itemRecipe'
 import Nav from './components/navbar'
 import auth from './utils/auth'
-import { BrowserRouter as Router, Routes, Route, RouteComponentProps } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import SignIn from './components/signIn'
 import Signup from './components/signUp'
 import DetailsRecipe from './components/detailsRecipe'
@@ -12,12 +12,21 @@ import ListRecipe from './components/listRecipe'
 import api from './services/apiServices'
 // import IRoute from './interfaces/routes'
 
+interface authenticatedUser {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  created_at: string;
+  updated_at: string;
+}
+
 function App() {
 
   const initialState = auth.isAuthenticated()
-  // const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialState) typesript equivalent
-  const [isAuthenticated, setIsAuthenticated] = useState(initialState)
-  const [user, setAuthenticatedUser] = useState([])
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialState)
+  const [user, setAuthenticatedUser] = useState<authenticatedUser[]>([])
   const [recipes, setRecipes] = useState([])
 
   useEffect(() => {
@@ -47,7 +56,7 @@ function App() {
           />
           <Route
             path='/recipe/:id'
-            element={<DetailsRecipe setIsAuthenticated={setIsAuthenticated} />}
+            element={<DetailsRecipe />}
           />
           <Route
             path='/recipe/post'
@@ -72,7 +81,7 @@ function App() {
               <Signup
                 setIsAuthenticated={setIsAuthenticated}
                 setAuthenticatedUser={setAuthenticatedUser}
-                user={user}
+                // user={user}
               />
             }
           />

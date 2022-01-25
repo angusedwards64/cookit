@@ -22,6 +22,15 @@ interface UserSignInObject {
   password: string;
 }
 
+interface Recipe {
+  title: string,
+  cuisine_id: number,
+  user_id: string,
+  description: string,
+  ingredients:string,
+  steps:string
+}
+
 
 //USER
 
@@ -69,9 +78,10 @@ const getRecipe = async (id: string) => {
     console.error(error)
   }
 }
-const postRecipes = async (tokenName, data) => {
+const postRecipes = async (tokenName: string, data: Recipe) => {
   console.log('api data: ', data);
   console.log('api token: ', tokenName);
+  console.log('hitting Api');
   try {
     const response = await apiClient.post('/api/recipes/create', data, {
       headers: { 'jwt': tokenName }
