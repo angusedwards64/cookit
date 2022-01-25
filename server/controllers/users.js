@@ -7,6 +7,7 @@ exports.create = async (req, res) => {
   console.log('user',req.body)
   const { name, username, email, password } = req.body
   const checkUser = await User.getByEmail({ email })
+  console.log(checkUser);
   if (checkUser.length)
     return res
       .status(409)
@@ -16,7 +17,7 @@ exports.create = async (req, res) => {
     const hash = await bcrypt.hash(password, 10)
     const newUser = { name, username, email, password: hash }
     const user = await User.add(newUser)
-    const accessToken = jwt.sign(user.id, SECRET_KEY)
+    const accessToken = jwt.sign(user.id, SECRET_KEY, { expiresIn: '5h' })
     res.status(201).send({ accessToken, user })
   } catch (error) {
     res.status(400).send({ error, message: 'Could not create user' })
@@ -29,7 +30,7 @@ exports.login = async (req, res) => {
     const user = await User.getByEmail({ email })
     const validatedPass = await bcrypt.compare(password, user[0].password)
     if (!validatedPass) throw new Error()
-    const accessToken = jwt.sign({ id: user[0].id }, SECRET_KEY)
+    const accessToken = jwt.sign({ id: user[0].id }, SECRET_KEY, { expiresIn: '5h' })
     res.status(200).send({ accessToken, user })
   } catch (error) {
     res

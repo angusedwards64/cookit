@@ -6,21 +6,20 @@ exports.create = async (req, res) => {
   const { title, description, ingredients, steps, cuisine_id } = req.body
   const user_id = req.user.id
   try {
-    console.log(req.file)
-    console.log(req.body)
+    const result = await Recipe.add({
+      user_id,
+      cuisine_id,
+      title,
+      description,
+      ingredients,
+      steps,
+    })
 
-    // const result = await Recipe.add({
-    //   title,
-    //   description,
-    //   ingredients,
-    //   steps,
-    //   user_id,
-    //   cuisine_id,
-    // })
-    res.status(201).send(req)
+    res.status(201);
+    res.json(result);
   } catch (error) {
     console.log(error)
-    res.status(400).send({ error, message: 'Could not create recipe' })
+    res.status(400).json({ error, message: 'Could not create recipe' })
   }
 }
 

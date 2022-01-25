@@ -51,7 +51,10 @@ function App() {
           />
           <Route
             path='/recipe/post'
-            element={<PostRecipe setIsAuthenticated={setIsAuthenticated} />}
+            element={<PostRecipe isAuthenticated={isAuthenticated}
+          setIsAuthenticated={setIsAuthenticated}
+          user={user}
+          setAuthenticatedUser={setAuthenticatedUser} />}
           />
           <Route
             path='signin'

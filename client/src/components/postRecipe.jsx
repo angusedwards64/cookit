@@ -32,14 +32,9 @@ const initialState = {
   imgs: [],
   file: [],
 }
-export default function PostRecipe() {
+export default function PostRecipe(props) {
   let navigate = useNavigate()
   const [state, setState] = useState(initialState)
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    navigate('/')
-  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -54,6 +49,20 @@ export default function PostRecipe() {
       imgs: event.target.files,
     })
   }
+  console.log(localStorage);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const { title, description, ingredients, steps } = state;
+    const recipe = { title, cuisine_id: 1, user_id: props.user.id, description, ingredients, steps };
+
+    const res = await api.postRecipes(localStorage.accessToken, recipe);
+
+
+    navigate('/')
+
+  }
+
   return (
     <Box bg={useColorModeValue('gray.50', 'inherit')} p={10}>
       <Box visibility={{ base: 'hidden', sm: 'visible' }} aria-hidden='true'>
