@@ -11,16 +11,12 @@ module.exports = knex({
   },
 })
 
-// const env = process.env
-
-// module.exports = {
-//   development: {
-//     client: 'postgresql',
-//     connection: {
-//       host: env.POSTGRES_HOST,
-//       database: env.POSTGRES_DATABASE,
-//       user: env.POSTGRES_USERNAME,
-//       password: env.POSTGRES_PASSWORD,
-//     },
+// module.exports = knex({
+//   client: 'postgres',
+//   connection: {
+//     host: 'localhost',
+//     user: 'reuben',
+//     database: 'testcookit',
+//     port: 5432,
 //   },
-// }
+// })

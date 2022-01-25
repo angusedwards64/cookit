@@ -1,4 +1,4 @@
-const db = require('../models/db')
+const { db } = require('../models/db')
 ;(async () => {
   try {
     await db.schema.dropTableIfExists('users')

@@ -1,10 +1,11 @@
 const { getById, list, add, deleteById } = require('./recipes.js');
+const { testDb } = require('./testDb.js')
 
 let recipeId;
-let mockRecipe = {
+const mockRecipe = {
   "title": "asd",
   "cuisine_id": 1,
-  "user_id": 1,
+  "user_id": 7,
   "description": "asd",
   "ingredients": "",
   "steps": ""
@@ -15,7 +16,7 @@ it('should be able to add recipes', () => {
   return add(mockRecipe)
   .then(data => {
     recipeId = data[0].id;
-    expect(data[0].title).toEqual("asd");
+    expect(data[0]).toEqual(expect.objectContaining({ title: 'asd'}));
   })
 })
 
@@ -28,7 +29,7 @@ it('should not add bad recipes', () => {
 
 it('should list the recipes', () => {
   return list().then(data =>
-    expect(data[data.length - 1].title)
+    expect(data[0].title)
     .toEqual("asd"));
 })
 

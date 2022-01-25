@@ -2,7 +2,6 @@ const db = require('./db')
 
 exports.getById = async (id) => {
   try {
-    console.log(id)
     const result = await db
       .select('recipes.*', 'cuisines.cuisine', 'users.username')
       .from('recipes')
