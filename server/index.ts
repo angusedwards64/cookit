@@ -1,5 +1,5 @@
 'use strict'
-
+import { Request, Response, NextFunction } from 'express';
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -18,7 +18,7 @@ app.use(cors(corsConfig))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(Router)
-app.get('*', (req, res) => {
+app.get('*', (req: Request, res: Response) => {
   res.status(404).send('404 Page Not Found')
 })
 
