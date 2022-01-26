@@ -4,6 +4,7 @@ const User = require('../models/users')
 const SECRET_KEY = process.env.SECRET_KEY || 'not secure'
 
 exports.create = async (req, res) => {
+  console.log('user',req.body)
   const { name, username, email, password } = req.body
   const checkUser = await User.getByEmail({ email })
   console.log(checkUser);
@@ -25,8 +26,10 @@ exports.create = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body
+  console.log('hi', req.body)
   try {
     const user = await User.getByEmail({ email })
+    console.log(user)
     const validatedPass = await bcrypt.compare(password, user[0].password)
     if (!validatedPass) throw new Error()
     const accessToken = jwt.sign({ id: user[0].id }, SECRET_KEY, { expiresIn: '5h' })

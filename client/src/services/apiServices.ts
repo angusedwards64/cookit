@@ -1,4 +1,4 @@
-import axios from 'axios'
+const axios = require('axios');
 
 const apiClient = axios.create({
   baseURL: 'http://localhost:5001',
@@ -9,12 +9,34 @@ const apiClient = axios.create({
   },
 })
 
-const api = {}
+
+interface UserSignUpObject {
+  email: string;
+  password: string;
+  name: string;
+  username: string;
+}
+
+interface UserSignInObject {
+  email: string;
+  password: string;
+}
+
+interface Recipe {
+  title: string,
+  cuisine_id: number,
+  user_id: string,
+  description: string,
+  ingredients:string,
+  steps:string
+}
+
 
 //USER
 
-api.signUp = async (user) => {
+const signUp = async (user: UserSignUpObject) => {
   try {
+    console.log(user)
     const response = await apiClient.post('/api/auth/signup', user)
     return response
   } catch (error) {
@@ -22,7 +44,8 @@ api.signUp = async (user) => {
   }
 }
 
-api.login = async (user) => {
+const login = async (user: UserSignInObject) => {
+  console.log(user)
   try {
     const response = await apiClient.post('/api/auth/login', user)
     return response
@@ -31,22 +54,23 @@ api.login = async (user) => {
   }
 }
 
-api.logout = async (tokenName,user) => {
+ const logout = async (tokenName: string, user: string) => {
   localStorage.removeItem(tokenName)
   localStorage.removeItem(user)
 }
 
 //RECIPE
 
-api.getRecipes = async () => {
+const getRecipes = async () => {
   try {
     const response = await apiClient.get('/api/recipes')
+    console.log('recipes', response)
     return response
   } catch (error) {
     console.error(error)
   }
 }
-api.getRecipe = async (id) => {
+const getRecipe = async (id: string) => {
   try {
     const response = await apiClient.get('/api/recipes/' + id)
     return response
@@ -54,9 +78,10 @@ api.getRecipe = async (id) => {
     console.error(error)
   }
 }
-api.postRecipes = async (tokenName, data) => {
+const postRecipes = async (tokenName: string, data: Recipe) => {
   console.log('api data: ', data);
   console.log('api token: ', tokenName);
+  console.log('hitting Api');
   try {
     const response = await apiClient.post('/api/recipes/create', data, {
       headers: { 'jwt': tokenName }
@@ -67,13 +92,7 @@ api.postRecipes = async (tokenName, data) => {
   }
 }
 
+const api = {signUp, login, logout, getRecipes, getRecipe, postRecipes}
+
 export default api
 
-// export default {
-//   getEvents() {
-//     return apiClient.get('/events')
-//   },
-//   getEvent(id) {
-//     return apiClient.get('/events/' + id)
-//   },
-// }

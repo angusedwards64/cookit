@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, Dispatch, SetStateAction } from 'react'
 import {
   Box,
   Flex,
@@ -21,7 +21,26 @@ import { useNavigate } from 'react-router-dom'
 
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 
-export default function Nav(props) {
+
+interface authenticatedUser {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface NavProps {
+        isAuthenticated: boolean;
+        setIsAuthenticated: Dispatch<SetStateAction<Boolean>>;
+        user: authenticatedUser;
+        setAuthenticatedUser:Dispatch<SetStateAction<authenticatedUser[]>>;
+}
+
+
+export default function Nav(props: NavProps) {
   let navigate = useNavigate()
   const handleClick = () => {
     removeToken()
@@ -34,7 +53,7 @@ export default function Nav(props) {
 
   const handleAuth = () => {
     props.setIsAuthenticated(false)
-    props.setAuthenticatedUser('')
+    props.setAuthenticatedUser([])
     auth.logout(() => navigate('/'))
   }
   const { colorMode, toggleColorMode } = useColorMode()

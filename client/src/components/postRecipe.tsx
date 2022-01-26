@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Dispatch, SetStateAction } from 'react'
 import {
   chakra,
   Box,
@@ -32,11 +32,29 @@ const initialState = {
   imgs: [],
   file: [],
 }
-export default function PostRecipe(props) {
+
+interface authenticatedUser {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface PostRecipeProps {
+        isAuthenticated: boolean;
+        setIsAuthenticated: Dispatch<SetStateAction<Boolean>>;
+        user: authenticatedUser;
+        setAuthenticatedUser:Dispatch<SetStateAction<authenticatedUser[]>>;
+}
+
+export default function PostRecipe(props: PostRecipeProps) {
   let navigate = useNavigate()
   const [state, setState] = useState(initialState)
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target
     setState((prevState) => ({
       ...prevState,
@@ -44,22 +62,22 @@ export default function PostRecipe(props) {
     }))
     console.log(state)
   }
-  const _onChange = (event) => {
-    setState({
-      imgs: event.target.files,
-    })
+  const _onChange = (event: any) => {
+    console.log(event)
+    // setState({
+    //   imgs: [event.target.files],
+    // })
   }
   console.log(localStorage);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const { title, description, ingredients, steps } = state;
     const recipe = { title, cuisine_id: 1, user_id: props.user.id, description, ingredients, steps };
 
     const res = await api.postRecipes(localStorage.accessToken, recipe);
-
-
     navigate('/')
+    console.log(res)
 
   }
 

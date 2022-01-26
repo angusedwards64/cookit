@@ -14,11 +14,12 @@ import {
   useColorModeValue,
   Link,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, Dispatch, SetStateAction } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import auth from '../utils/auth'
 import api from '../services/apiServices'
 import { useNavigate } from 'react-router-dom'
+import React from 'react'
 
 const initialState = {
   name: '',
@@ -27,13 +28,29 @@ const initialState = {
   password: '',
 }
 
-export default function Signup(props) {
+interface authenticatedUser {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface  SignUpProps {
+      setIsAuthenticated: Dispatch<SetStateAction<boolean>>,
+      setAuthenticatedUser: Dispatch<SetStateAction<authenticatedUser[]>>,
+}
+
+export default function Signup(props: SignUpProps) {
+
   const [showPassword, setShowPassword] = useState(false)
 
   let navigate = useNavigate()
   const [state, setState] = useState(initialState)
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target
     setState((prevState) => ({
       ...prevState,
@@ -41,7 +58,7 @@ export default function Signup(props) {
     }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const { email, password, name, username } = state
     const user = { email, password, name, username }

@@ -3,10 +3,10 @@ const knex = require('knex')
 module.exports = knex({
   client: 'postgres',
   connection: {
-    host: 'localhost',
-    user: 'reuben',
-    // password: '100200300',
-    database: 'cookit',
+    host: '127.0.0.1',
+    user: 'gooseeduardos',
+    password: '',
+    database: 'cookit2',
     port: 5432,
   },
 })

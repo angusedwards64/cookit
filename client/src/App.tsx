@@ -10,11 +10,38 @@ import DetailsRecipe from './components/detailsRecipe'
 import PostRecipe from './components/postRecipe'
 import ListRecipe from './components/listRecipe'
 import api from './services/apiServices'
+// import IRoute from './interfaces/routes'
+
+interface authenticatedUser {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface Recipe {
+  id: number,
+  user_id: number,
+  cuisine_id: number,
+  title: string,
+  description: string,
+  ingredients: string,
+  steps: string,
+  likes: null,
+  created_at: string,
+  updated_at: string,
+  cuisine: string,
+  username: string,
+}
 
 function App() {
+
   const initialState = auth.isAuthenticated()
-  const [isAuthenticated, setIsAuthenticated] = useState(initialState)
-  const [user, setAuthenticatedUser] = useState([])
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialState)
+  const [user, setAuthenticatedUser] = useState<authenticatedUser[]>([])
   const [recipes, setRecipes] = useState([])
 
   useEffect(() => {
@@ -29,28 +56,30 @@ function App() {
         <Nav
           isAuthenticated={isAuthenticated}
           setIsAuthenticated={setIsAuthenticated}
-          user={user}
+          user={user[0]}
           setAuthenticatedUser={setAuthenticatedUser}
         />
         <Routes>
           <Route
             path='/'
             element={
+              <>
               <ListRecipe
                 setIsAuthenticated={setIsAuthenticated}
                 recipes={recipes}
-              />
+                />
+             </>
             }
           />
           <Route
             path='/recipe/:id'
-            element={<DetailsRecipe setIsAuthenticated={setIsAuthenticated} />}
+            // element={<DetailsRecipe setIsAuthenticated={setIsAuthenticated}/>}
           />
           <Route
             path='/recipe/post'
             element={<PostRecipe isAuthenticated={isAuthenticated}
           setIsAuthenticated={setIsAuthenticated}
-          user={user}
+          user={user[0]}
           setAuthenticatedUser={setAuthenticatedUser} />}
           />
           <Route
@@ -58,7 +87,7 @@ function App() {
             element={
               <SignIn
                 setIsAuthenticated={setIsAuthenticated}
-                user={user}
+                // user={user}
                 setAuthenticatedUser={setAuthenticatedUser}
               />
             }
@@ -69,7 +98,7 @@ function App() {
               <Signup
                 setIsAuthenticated={setIsAuthenticated}
                 setAuthenticatedUser={setAuthenticatedUser}
-                user={user}
+                // user={user}
               />
             }
           />

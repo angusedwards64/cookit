@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import React, { useState } from 'react'
+import React, { useState, Dispatch, SetStateAction } from 'react'
 import auth from '../utils/auth'
 import api from '../services/apiServices'
 import { useNavigate } from 'react-router-dom'
@@ -23,11 +23,29 @@ const initialState = {
   password: '',
 }
 
-export default function SignIn(props) {
+
+interface authenticatedUser {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface SignInProps {
+  setIsAuthenticated: Dispatch<SetStateAction<boolean>>,
+      setAuthenticatedUser: Dispatch<SetStateAction<authenticatedUser[]>>,
+}
+
+
+
+export default function SignIn(props: SignInProps) {
   let navigate = useNavigate()
   const [state, setState] = useState(initialState)
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target
     setState((prevState) => ({
       ...prevState,
@@ -35,7 +53,7 @@ export default function SignIn(props) {
     }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const { email, password } = state
     const user = { email, password }

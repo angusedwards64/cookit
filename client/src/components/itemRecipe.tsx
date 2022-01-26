@@ -13,9 +13,29 @@ import {
 // import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import React from 'react'
 
+interface Recipe {
+  id: number,
+  user_id: number,
+  cuisine_id: number,
+  title: string,
+  description: string,
+  ingredients: string,
+  steps: string,
+  likes: null,
+  created_at: string,
+  updated_at: string,
+  cuisine: string,
+  username: string,
+}
 
-export default function ItemRecipe({ recipe }) {
+interface ItemRecipeProps {
+  key: number;
+  recipe: Recipe;
+}
+
+export default function ItemRecipe( props : ItemRecipeProps) {
   // let navigate = useNavigate()
 
   return (
@@ -49,16 +69,16 @@ export default function ItemRecipe({ recipe }) {
             fontSize={'sm'}
             letterSpacing={1.1}
           >
-            <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+            <Link to={`/recipe/${props.recipe.id}`}>{props.recipe.title}</Link>
           </Text>
           <Heading
             color={useColorModeValue('gray.700', 'white')}
             fontSize={'2xl'}
             fontFamily={'body'}
           >
-            {recipe.cuisine}
+            {props.recipe.cuisine}
           </Heading>
-          <Text color={'gray.500'}>{recipe.description}</Text>
+          <Text color={'gray.500'}>{props.recipe.description}</Text>
         </Stack>
         <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
           <Badge
@@ -92,8 +112,8 @@ export default function ItemRecipe({ recipe }) {
             alt={'Author'}
           /> */}
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>  {recipe.username}</Text>
-            <Text color={'gray.500'}>{moment(recipe.updated_at).format('DD MMM YYYY')}</Text>
+            <Text fontWeight={600}>  {props.recipe.username}</Text>
+            <Text color={'gray.500'}>{moment(props.recipe.updated_at).format('DD MMM YYYY')}</Text>
           </Stack>
         </Stack>
       </Box>

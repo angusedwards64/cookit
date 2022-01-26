@@ -8,7 +8,6 @@ import {
   Image,
   Flex,
   VStack,
-  //   Button,
   Heading,
   SimpleGrid,
   StackDivider,
@@ -22,14 +21,29 @@ import {
 import { useParams } from 'react-router-dom'
 import api from '../services/apiServices'
 
+interface RECIPES {
+      user_id: string;
+      cuisine_id: string;
+      title: string;
+      description: string;
+      ingredients: string;
+      steps: string;
+}
+
+
+
 export default function DetailsRecipe() {
+
+  // console.log('hi')
   const { id } = useParams()
-  const [recipe, setRecipe] = useState([])
+  const [recipe, setRecipe] = useState<RECIPES[]>([])
 
   useEffect(() => {
+    if (id)
     api.getRecipe(id).then((data) => {
-      setRecipe(data.data)
+      setRecipe(data.data);
     })
+
   })
   return (
     <Container maxW={'7xl'}>
@@ -58,14 +72,14 @@ export default function DetailsRecipe() {
               fontWeight={600}
               fontSize={{ base: '2xl', sm: '4xl', lg: '5xl' }}
             >
-              {recipe.title}
+              {recipe[0].title}
             </Heading>
             <Text
               color={useColorModeValue('gray.900', 'gray.400')}
               fontWeight={300}
               fontSize={'2xl'}
             >
-              {recipe.cuisine}
+              {recipe[0].cuisine_id}
             </Text>
           </Box>
 
@@ -84,14 +98,8 @@ export default function DetailsRecipe() {
                 fontSize={'2xl'}
                 fontWeight={'300'}
               >
-                {recipe.description}
+                {recipe[0].description}
               </Text>
-              {/* <Text fontSize={'lg'}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
-                aliquid amet at delectus doloribus dolorum expedita hic, ipsum
-                maxime modi nam officiis porro, quae, quisquam quos
-                reprehenderit velit? Natus, totam.
-              </Text> */}
             </VStack>
             <Box>
               <Text
@@ -106,7 +114,7 @@ export default function DetailsRecipe() {
 
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                 <List spacing={2}>
-                  <ListItem>{recipe.ingredients}</ListItem>
+                  <ListItem>{recipe[0].ingredients}</ListItem>
                   <ListItem>Olive Oil</ListItem>{' '}
                   <ListItem>Chicken Breasts</ListItem>
                 </List>
@@ -133,14 +141,14 @@ export default function DetailsRecipe() {
                   <Text as={'span'} fontWeight={'bold'}>
                     First:
                   </Text>{' '}
-                  {recipe.steps}
+                  {recipe[0].steps}
                 </ListItem>
                 <ListItem>
                   <Text as={'span'} fontWeight={'bold'}>
                     Second:
                   </Text>{' '}
                   Heat the oil in a saucepan over a high heat. Add the pancetta
-                  and cook, stirring, for about 2–3 minutes, or until the fat
+                  and cook, stirring, for about 23 minutes, or until the fat
                   has rendered and the bacon is golden and crisp. Remove from
                   the pan with a slotted spoon and drain on kitchen paper.
                 </ListItem>
@@ -150,14 +158,14 @@ export default function DetailsRecipe() {
                   </Text>{' '}
                   Add the onion and carrots to the pancetta pan and cook for 5
                   minutes until the onion is softened. Add the celery and garlic
-                  and cook for a further 3–4 minutes, stirring occasionally.
+                  and cook for a further 34 minutes, stirring occasionally.
                 </ListItem>
                 <ListItem>
                   <Text as={'span'} fontWeight={'bold'}>
                     After the Oven:
                   </Text>{' '}
                   Add the thyme, bay leaf, stock and tomatoes, stir and bring to
-                  a gentle simmer. Add the lentils and cook for 20–25 minutes,
+                  a gentle simmer. Add the lentils and cook for 2025 minutes,
                   or until they are softened. Remove the bay leaf and use a
                   stick blender or food processor to partially blend the soup,
                   keeping a fairly chunky texture.
@@ -174,7 +182,7 @@ export default function DetailsRecipe() {
                   <Text as={'span'} fontWeight={'bold'}>
                     Fridge:
                   </Text>{' '}
-                  Domed, scratch‑resistant sapphire crystal with anti‑reflective
+                  Domed, scratch resistant sapphire crystal with anti reflective
                   treatment inside
                 </ListItem>
                 <ListItem>
