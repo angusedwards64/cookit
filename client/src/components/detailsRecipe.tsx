@@ -16,19 +16,9 @@ import {
   List,
   ListItem,
 } from '@chakra-ui/react'
-// import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
-// import { MdLocalShipping } from 'react-icons/md'
 import { useParams } from 'react-router-dom'
 import api from '../services/apiServices'
-
-interface RECIPES {
-      user_id: string;
-      cuisine_id: string;
-      title: string;
-      description: string;
-      ingredients: string;
-      steps: string;
-}
+import { Recipes } from '../interfaces/Recipes'
 
 
 
@@ -36,7 +26,7 @@ export default function DetailsRecipe() {
 
   // console.log('hi')
   const { id } = useParams()
-  const [recipe, setRecipe] = useState<RECIPES[]>([])
+  const [recipe, setRecipe] = useState<Recipes[]>([])
 
   useEffect(() => {
     if (id)

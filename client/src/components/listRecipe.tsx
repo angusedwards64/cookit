@@ -1,21 +1,9 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
 import ItemRecipe from './itemRecipe'
+import { Recipe } from '../interfaces/Recipes'
 
 
-interface Recipe {
-  id: number,
-  user_id: number,
-  cuisine_id: number,
-  title: string,
-  description: string,
-  ingredients: string,
-  steps: string,
-  likes: null,
-  created_at: string,
-  updated_at: string,
-  cuisine: string,
-  username: string,
-}
+
 
 interface ListRecipeProps {
   recipes: Recipe[]

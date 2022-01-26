@@ -1,3 +1,5 @@
+import { ApiRecipe } from '../interfaces/Recipes'
+import { UserSignUpObject, UserSignInObject } from '../interfaces/User'
 const axios = require('axios');
 
 const apiClient = axios.create({
@@ -10,26 +12,17 @@ const apiClient = axios.create({
 })
 
 
-interface UserSignUpObject {
-  email: string;
-  password: string;
-  name: string;
-  username: string;
-}
+// interface UserSignUpObject {
+//   email: string;
+//   password: string;
+//   name: string;
+//   username: string;
+// }
 
-interface UserSignInObject {
-  email: string;
-  password: string;
-}
-
-interface Recipe {
-  title: string,
-  cuisine_id: number,
-  user_id: string,
-  description: string,
-  ingredients:string,
-  steps:string
-}
+// interface UserSignInObject {
+//   email: string;
+//   password: string;
+// }
 
 
 //USER
@@ -78,7 +71,7 @@ const getRecipe = async (id: string) => {
     console.error(error)
   }
 }
-const postRecipes = async (tokenName: string, data: Recipe) => {
+const postRecipes = async (tokenName: string, data: ApiRecipe) => {
   console.log('api data: ', data);
   console.log('api token: ', tokenName);
   console.log('hitting Api');

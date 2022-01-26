@@ -6,43 +6,20 @@ import auth from './utils/auth'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import SignIn from './components/signIn'
 import Signup from './components/signUp'
-import DetailsRecipe from './components/detailsRecipe'
 import PostRecipe from './components/postRecipe'
 import ListRecipe from './components/listRecipe'
 import api from './services/apiServices'
-// import IRoute from './interfaces/routes'
+import { Recipe } from './interfaces/Recipes'
+import { authenticatedUser } from './interfaces/User'
 
-interface authenticatedUser {
-  id: string;
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  created_at: string;
-  updated_at: string;
-}
 
-interface Recipe {
-  id: number,
-  user_id: number,
-  cuisine_id: number,
-  title: string,
-  description: string,
-  ingredients: string,
-  steps: string,
-  likes: null,
-  created_at: string,
-  updated_at: string,
-  cuisine: string,
-  username: string,
-}
 
 function App() {
 
   const initialState = auth.isAuthenticated()
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialState)
   const [user, setAuthenticatedUser] = useState<authenticatedUser[]>([])
-  const [recipes, setRecipes] = useState([])
+  const [recipes, setRecipes] = useState<Recipe[]>([])
 
   useEffect(() => {
     api.getRecipes().then((data) => {

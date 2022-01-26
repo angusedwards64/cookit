@@ -20,6 +20,7 @@ import auth from '../utils/auth'
 import api from '../services/apiServices'
 import { useNavigate } from 'react-router-dom'
 import React from 'react'
+import { authenticatedUser } from '../interfaces/User'
 
 const initialState = {
   name: '',
@@ -28,15 +29,7 @@ const initialState = {
   password: '',
 }
 
-interface authenticatedUser {
-  id: string;
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  created_at: string;
-  updated_at: string;
-}
+
 
 interface  SignUpProps {
       setIsAuthenticated: Dispatch<SetStateAction<boolean>>,
