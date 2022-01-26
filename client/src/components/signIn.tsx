@@ -17,6 +17,7 @@ import React, { useState, Dispatch, SetStateAction } from 'react'
 import auth from '../utils/auth'
 import api from '../services/apiServices'
 import { useNavigate } from 'react-router-dom'
+import { authenticatedUser } from '../interfaces/User'
 
 const initialState = {
   email: '',
@@ -24,15 +25,8 @@ const initialState = {
 }
 
 
-interface authenticatedUser {
-  id: string;
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  created_at: string;
-  updated_at: string;
-}
+
+
 
 interface SignInProps {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>,

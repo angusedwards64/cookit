@@ -21,6 +21,7 @@ import {
 } from '@chakra-ui/react'
 import api from '../services/apiServices'
 import { useNavigate } from 'react-router-dom'
+import { authenticatedUser } from '../interfaces/User'
 
 const initialState = {
   title: '',
@@ -33,15 +34,7 @@ const initialState = {
   file: [],
 }
 
-interface authenticatedUser {
-  id: string;
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  created_at: string;
-  updated_at: string;
-}
+
 
 interface PostRecipeProps {
         isAuthenticated: boolean;
@@ -64,9 +57,6 @@ export default function PostRecipe(props: PostRecipeProps) {
   }
   const _onChange = (event: any) => {
     console.log(event)
-    // setState({
-    //   imgs: [event.target.files],
-    // })
   }
   console.log(localStorage);
 

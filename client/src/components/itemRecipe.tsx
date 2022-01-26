@@ -14,21 +14,8 @@ import {
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import React from 'react'
+import { Recipe } from '../interfaces/Recipes'
 
-interface Recipe {
-  id: number,
-  user_id: number,
-  cuisine_id: number,
-  title: string,
-  description: string,
-  ingredients: string,
-  steps: string,
-  likes: null,
-  created_at: string,
-  updated_at: string,
-  cuisine: string,
-  username: string,
-}
 
 interface ItemRecipeProps {
   key: number;
