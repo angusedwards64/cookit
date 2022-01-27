@@ -28,3 +28,13 @@ exports.add = async (data) => {
     return e
   }
 }
+
+exports.deleteById = async (id) => {
+  try {
+    const result = await db.from('users').where({ id }).del()
+    return result
+  } catch (e) {
+    return e
+  }
+}
+

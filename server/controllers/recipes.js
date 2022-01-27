@@ -1,6 +1,4 @@
-// const User = require('../models/users')
 const Recipe = require('../models/recipes')
-// const User = require('../models/users')
 
 exports.create = async (req, res) => {
   console.log('request body', req.body)

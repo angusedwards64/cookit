@@ -2,7 +2,6 @@ const db = require('./db')
 
 exports.getById = async (id) => {
   try {
-    console.log(id)
     const result = await db
       .select('recipes.*', 'cuisines.cuisine', 'users.username')
       .from('recipes')
@@ -34,7 +33,6 @@ exports.add = async (data) => {
     const result = await db.insert(data).into('recipes').returning('*')
     return result
   } catch (e) {
-    console.log(e)
     return e
   }
 }
